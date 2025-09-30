@@ -11,9 +11,10 @@ export default function HomePage() {
         <Hero />
         <SinglePreview
           title="Further"
-          releaseDate="October 7, 2024"
+          releaseDate="7 OCT 2024"
           description="Electronic prayers for modern souls"
           coverImage="/images/Further.png"
+          spotifyUrl=""
         />
       </main>
     </>

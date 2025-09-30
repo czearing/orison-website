@@ -17,8 +17,8 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto 1fr;
-  gap: 3rem 4rem;
+  grid-template-rows: auto auto;
+  gap: 0 4rem;
   align-items: start;
   opacity: 0;
   transform: translateY(40px);
@@ -31,17 +31,21 @@
 }
 
 .header {
-  grid-column: 1 / -1;
-  text-align: center;
+  grid-column: 2;
+  grid-row: 1;
+  text-align: left;
+  padding-left: 2rem;
+  margin-bottom: -2rem;
 }
 
 .label {
   color: #8a9ba8;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .coverArea {
   grid-column: 1;
+  grid-row: 1 / -1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -60,9 +64,10 @@
   height: auto;
   aspect-ratio: 1;
   border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.7),
-    0 0 20px rgba(138, 155, 168, 0.05);
+    0 4px 20px rgba(0, 0, 0, 0.5);
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -92,6 +97,7 @@
 
 .infoArea {
   grid-column: 2;
+  grid-row: 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -99,42 +105,28 @@
 }
 
 .title {
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 1rem 0;
   color: #fff;
 }
 
 .date {
   color: #8a9ba8;
-  opacity: 0.5;
+  opacity: 0.6;
   margin: 0 0 2rem 0;
 }
 
 .description {
   color: #8a9ba8;
-  opacity: 0.75;
-  margin: 0 0 2rem 0;
+  opacity: 0.65;
+  margin: 0 0 2.5rem 0;
   font-style: italic;
+  font-weight: 300;
 }
 
-.playerContainer {
-  margin: 2rem 0 0 0;
-}
-
-.playerPlaceholder {
-  width: 100%;
-  height: 160px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(138, 155, 168, 0.15);
-  border-radius: 4px;
+.ctaContainer {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(10px);
-}
-
-.playerText {
-  opacity: 0.4;
-  font-style: italic;
+  gap: 1rem;
+  margin-top: 0.5rem;
 }
 
 @keyframes coverFloat {
@@ -215,8 +207,8 @@
     font-size: 0.938rem;
   }
 
-  .playerPlaceholder {
-    height: 140px;
+  .ctaContainer {
+    flex-direction: column;
   }
 }
 
@@ -241,5 +233,9 @@
 
   .description {
     font-size: 0.875rem;
+  }
+
+  .ctaContainer {
+    flex-direction: column;
   }
 }

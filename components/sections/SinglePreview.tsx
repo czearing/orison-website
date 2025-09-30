@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Heading, Label, Body, Caption } from "@/components/common/Typography";
+import { Button } from "@/components/common/Button";
 import styles from "./SinglePreview.module.css";
 
 interface SinglePreviewProps {
@@ -71,15 +72,16 @@ export function SinglePreview({
               {description}
             </Body>
 
-            {(spotifyUrl || soundcloudUrl) && (
-              <div className={styles.playerContainer}>
-                <div className={styles.playerPlaceholder}>
-                  <Caption className={styles.playerText}>
-                    Embedded Spotify/SoundCloud player when available
-                  </Caption>
-                </div>
-              </div>
-            )}
+            <div className={styles.ctaContainer}>
+              <Button href={spotifyUrl || "#"} variant="primary">
+                Pre-Save on Spotify
+              </Button>
+              {soundcloudUrl && (
+                <Button href={soundcloudUrl} variant="secondary">
+                  Listen on SoundCloud
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>
