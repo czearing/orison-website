@@ -4,7 +4,8 @@
       "Bash(npx create-next-app:*)",
       "Bash(rm:*)",
       "Bash(yarn install)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(yarn add:*)"
     ],
     "deny": [],
     "ask": []

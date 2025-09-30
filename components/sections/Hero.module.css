@@ -1,0 +1,170 @@
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.content {
+  text-align: center;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.titleWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.title {
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 700;
+  letter-spacing: 0.8rem;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.letter {
+  display: inline-block;
+  background: linear-gradient(180deg, #fff 0%, #aac9e0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  transform: translateY(40px) rotateX(90deg);
+  animation: letterReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  text-shadow: 0 0 40px rgba(170, 201, 224, 0.3);
+}
+
+.titleGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(ellipse, rgba(170, 201, 224, 0.15) 0%, transparent 70%);
+  filter: blur(40px);
+  animation: glowPulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.subtitle {
+  font-size: clamp(0.875rem, 2.5vw, 1.25rem);
+  font-weight: 300;
+  letter-spacing: 0.3rem;
+  margin-top: 2rem;
+  opacity: 0;
+  color: #aac9e0;
+  text-transform: uppercase;
+  animation: fadeInUp 1s ease-out 0.8s forwards;
+}
+
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 1.2s forwards;
+}
+
+.ornamentLine {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(170, 201, 224, 0.5) 50%, transparent 100%);
+}
+
+.ornamentDot {
+  width: 4px;
+  height: 4px;
+  background: #aac9e0;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(170, 201, 224, 0.6);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 1.6s forwards;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(180deg, transparent 0%, rgba(170, 201, 224, 0.6) 50%, transparent 100%);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes letterReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 0.5;
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes scrollPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+}
