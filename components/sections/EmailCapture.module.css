@@ -87,6 +87,12 @@
   transform: translateY(0);
 }
 
+.submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .message {
   color: #8a9ba8;
   opacity: 0.8;

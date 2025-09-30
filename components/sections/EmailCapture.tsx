@@ -1,31 +1,38 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { Label, Caption } from "@/components/common/Typography";
+import { useSubscribe } from "@/utils/useSubscribe";
 import styles from "./EmailCapture.module.css";
 
 export function EmailCapture() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const { mutate, isPending, isSuccess, isError, reset } = useSubscribe();
 
-  const handleSubmit = async (e: FormEvent) => {
+  useEffect(() => {
+    if (isSuccess) {
+      setEmail("");
+      const timeout = setTimeout(() => reset(), 5000);
+      return () => clearTimeout(timeout);
+    }
+  }, [isSuccess, reset]);
+
+  useEffect(() => {
+    if (isError) {
+      const timeout = setTimeout(() => reset(), 5000);
+      return () => clearTimeout(timeout);
+    }
+  }, [isError, reset]);
+
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
-    // TODO: Implement email capture API
-    console.log("Email submitted:", email);
-
-    setStatus("success");
-    setEmail("");
-
-    setTimeout(() => {
-      setStatus("idle");
-    }, 3000);
+    mutate({ email });
   };
 
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        <Label className={styles.heading}>Join the congregation</Label>
+        <Label className={styles.heading}>Join the Procession</Label>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputWrapper}>
@@ -38,18 +45,22 @@ export function EmailCapture() {
               className={styles.input}
               aria-label="Email address"
             />
-            <button type="submit" className={styles.submit}>
-              Submit
+            <button
+              type="submit"
+              className={styles.submit}
+              disabled={isPending}
+            >
+              {isPending ? "Submitting..." : "Submit"}
             </button>
           </div>
 
-          {status === "success" && (
+          {isSuccess && (
             <Caption className={styles.message}>
-              Thank you for joining the congregation
+              Thank you for joining the procession
             </Caption>
           )}
 
-          {status === "error" && (
+          {isError && (
             <Caption className={styles.error}>
               Something went wrong. Please try again.
             </Caption>
