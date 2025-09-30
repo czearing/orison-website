@@ -24,21 +24,19 @@
 
 .titleWrapper {
   position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
 }
 
 .title {
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
   position: relative;
 }
 
 .letter {
   display: inline-block;
-  background: linear-gradient(180deg, #e8e8e8 0%, #8a9ba8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #fff;
   opacity: 0;
   transform: translateY(40px) rotateX(90deg);
   animation: letterReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -55,10 +53,12 @@
   filter: blur(40px);
   animation: glowPulse 12s ease-in-out infinite;
   pointer-events: none;
+  z-index: -1;
 }
 
 .subtitle {
-  margin-top: 3rem;
+  display: block;
+  margin: 0;
   opacity: 0;
   color: #8a9ba8;
   animation: fadeInUp 1.5s ease-out 1.2s forwards;

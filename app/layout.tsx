@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Space_Grotesk } from "next/font/google";
+import { DM_Sans, DM_Serif_Display, JetBrains_Mono } from "next/font/google";
 import "@/styles/globals.css";
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const dmSerif = DM_Serif_Display({
+  weight: ["400"],
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-dm-serif",
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
@@ -32,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${playfair.variable} ${spaceGrotesk.variable}`}>
+      <body className={`${dmSans.variable} ${dmSerif.variable} ${jetbrainsMono.variable}`}>
         {children}
       </body>
     </html>

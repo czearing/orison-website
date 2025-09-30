@@ -100,10 +100,7 @@
 
 .title {
   margin: 0 0 1.5rem 0;
-  background: linear-gradient(180deg, #e8e8e8 0%, #8a9ba8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #fff;
 }
 
 .date {
