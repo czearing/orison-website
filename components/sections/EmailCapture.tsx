@@ -34,7 +34,7 @@ export function EmailCapture() {
       <div className={styles.container}>
         <Label className={styles.heading}>Join the Procession</Label>
         <Body size="sm" className={styles.subheading}>
-          New releases, exclusive content, and early access to what's next
+          New releases, exclusive content, and early access to what&apos;s next
         </Body>
 
         <form onSubmit={handleSubmit} className={styles.form}>

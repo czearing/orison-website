@@ -17,8 +17,18 @@ interface HeadingProps {
 }
 
 export function Heading({ children, level = 2, className = "" }: HeadingProps) {
-  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
-  return <Tag className={`${styles.heading} ${className}`}>{children}</Tag>;
+  const combinedClassName = `${styles.heading} ${className}`;
+
+  switch (level) {
+    case 1:
+      return <h1 className={combinedClassName}>{children}</h1>;
+    case 3:
+      return <h3 className={combinedClassName}>{children}</h3>;
+    case 4:
+      return <h4 className={combinedClassName}>{children}</h4>;
+    default:
+      return <h2 className={combinedClassName}>{children}</h2>;
+  }
 }
 
 interface BodyProps {
