@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { Heading, Label, Body, Caption } from "@/components/common/Typography";
 import styles from "./SinglePreview.module.css";
 
 interface SinglePreviewProps {
@@ -44,35 +45,42 @@ export function SinglePreview({
   return (
     <section ref={sectionRef} className={styles.section}>
       <div className={styles.container}>
-        <div className={`${styles.content} ${isVisible ? styles.visible : ""}`}>
-          <span className={styles.label}>Next Single</span>
-
-          <div className={styles.coverWrapper}>
-            <div className={styles.coverGlow} />
-            <Image
-              src={coverImage}
-              alt={`${title} cover art`}
-              width={400}
-              height={400}
-              className={styles.coverImage}
-              priority
-            />
+        <div className={`${styles.grid} ${isVisible ? styles.visible : ""}`}>
+          <div className={styles.header}>
+            <Label className={styles.label}>Next Single</Label>
           </div>
 
-          <h2 className={styles.title}>{title}</h2>
-          <p className={styles.date}>{releaseDate}</p>
-
-          {(spotifyUrl || soundcloudUrl) && (
-            <div className={styles.playerContainer}>
-              <div className={styles.playerPlaceholder}>
-                <p className={styles.playerText}>
-                  Embedded Spotify/SoundCloud player when available
-                </p>
-              </div>
+          <div className={styles.coverArea}>
+            <div className={styles.coverWrapper}>
+              <div className={styles.coverGlow} />
+              <Image
+                src={coverImage}
+                alt={`${title} cover art`}
+                width={500}
+                height={500}
+                className={styles.coverImage}
+                priority
+              />
             </div>
-          )}
+          </div>
 
-          <p className={styles.description}>{description}</p>
+          <div className={styles.infoArea}>
+            <Heading className={styles.title}>{title}</Heading>
+            <Caption className={styles.date}>{releaseDate}</Caption>
+            <Body size="lg" className={styles.description}>
+              {description}
+            </Body>
+
+            {(spotifyUrl || soundcloudUrl) && (
+              <div className={styles.playerContainer}>
+                <div className={styles.playerPlaceholder}>
+                  <Caption className={styles.playerText}>
+                    Embedded Spotify/SoundCloud player when available
+                  </Caption>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

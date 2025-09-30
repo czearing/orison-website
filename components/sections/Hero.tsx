@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Display, Label } from "@/components/common/Typography";
 import styles from "./Hero.module.css";
 
 export function Hero() {
@@ -14,20 +15,20 @@ export function Hero() {
     <section className={styles.hero}>
       <div className={`${styles.content} ${mounted ? styles.visible : ""}`}>
         <div className={styles.titleWrapper}>
-          <h1 className={styles.title}>
+          <Display className={styles.title}>
             {"ORISON".split("").map((letter, i) => (
               <span
                 key={i}
                 className={styles.letter}
-                style={{ animationDelay: `${i * 0.1}s` }}
+                style={{ animationDelay: `${i * 0.2}s` }}
               >
                 {letter}
               </span>
             ))}
-          </h1>
+          </Display>
           <div className={styles.titleGlow} />
         </div>
-        <p className={styles.subtitle}>Neo-Classical Progressive House</p>
+        <Label className={styles.subtitle}>Neo-Classical Progressive House</Label>
         <div className={styles.ornament}>
           <div className={styles.ornamentLine} />
           <div className={styles.ornamentDot} />
