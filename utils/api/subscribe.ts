@@ -8,7 +8,7 @@ export interface SubscribeResponse {
 }
 
 export async function subscribeEmail(data: SubscribeData): Promise<SubscribeResponse> {
-  const response = await fetch("/api/subscribe", {
+  const response = await fetch("/api/newsletter", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

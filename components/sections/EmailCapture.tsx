@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent, useEffect } from "react";
-import { Label, Caption } from "@/components/common/Typography";
+import { Label, Caption, Body } from "@/components/common/Typography";
 import { useSubscribe } from "@/utils/useSubscribe";
 import styles from "./EmailCapture.module.css";
 
@@ -33,6 +33,9 @@ export function EmailCapture() {
     <section className={styles.section}>
       <div className={styles.container}>
         <Label className={styles.heading}>Join the Procession</Label>
+        <Body size="sm" className={styles.subheading}>
+          New releases, exclusive content, and early access to what's next
+        </Body>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputWrapper}>
@@ -50,7 +53,7 @@ export function EmailCapture() {
               className={styles.submit}
               disabled={isPending}
             >
-              {isPending ? "Submitting..." : "Submit"}
+              {isPending ? "Joining..." : "Join Now"}
             </button>
           </div>
 

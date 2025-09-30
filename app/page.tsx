@@ -2,6 +2,7 @@ import { GradientBackground } from "@/components/common/GradientBackground";
 import { Hero } from "@/components/sections/Hero";
 import { SinglePreview } from "@/components/sections/SinglePreview";
 import { EmailCapture } from "@/components/sections/EmailCapture";
+import { Presence } from "@/components/sections/Presence";
 import styles from "./page.module.css";
 
 export default function HomePage() {
@@ -18,6 +19,7 @@ export default function HomePage() {
           spotifyUrl=""
         />
         <EmailCapture />
+        <Presence />
       </main>
     </>
   );
