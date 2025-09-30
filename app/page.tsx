@@ -12,7 +12,7 @@ export default function HomePage() {
         <SinglePreview
           title="Further"
           releaseDate="7 OCT 2024"
-          description="Electronic prayers for modern souls"
+          description="There is only forward"
           coverImage="/images/Further.png"
           spotifyUrl=""
         />

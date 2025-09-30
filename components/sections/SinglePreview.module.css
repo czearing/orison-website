@@ -117,10 +117,10 @@
 
 .description {
   color: #8a9ba8;
-  opacity: 0.65;
+  opacity: 0.7;
   margin: 0 0 2.5rem 0;
   font-style: italic;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .ctaContainer {
@@ -175,15 +175,20 @@
   .grid {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
-    gap: 2rem;
+    gap: 3rem;
   }
 
   .header {
-    margin-bottom: 1rem;
+    grid-column: 1;
+    grid-row: 1;
+    text-align: center;
+    padding-left: 0;
+    margin-bottom: 0;
   }
 
   .coverArea {
     grid-column: 1;
+    grid-row: 2;
     justify-content: center;
     padding-right: 0;
   }
@@ -194,13 +199,13 @@
 
   .infoArea {
     grid-column: 1;
+    grid-row: 3;
     padding-left: 0;
     text-align: center;
   }
 
   .title {
     font-size: clamp(2rem, 8vw, 2.5rem);
-    letter-spacing: 0.3rem;
   }
 
   .description {
@@ -209,6 +214,7 @@
 
   .ctaContainer {
     flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -218,24 +224,23 @@
     padding: 3rem 1rem;
   }
 
+  .grid {
+    gap: 2rem;
+  }
+
   .coverWrapper {
     max-width: 320px;
   }
 
   .title {
-    letter-spacing: 0.2rem;
+    font-size: clamp(1.75rem, 10vw, 2rem);
   }
 
   .date {
-    font-size: 0.75rem;
-    letter-spacing: 0.1rem;
+    font-size: 0.688rem;
   }
 
   .description {
     font-size: 0.875rem;
-  }
-
-  .ctaContainer {
-    flex-direction: column;
   }
 }
