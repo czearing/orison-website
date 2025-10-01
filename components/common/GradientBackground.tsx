@@ -11,6 +11,7 @@ export function GradientBackground() {
         camera={{ position: [0, 0, 5], fov: 75 }}
         gl={{ alpha: true, antialias: true }}
         resize={{ scroll: false, debounce: { scroll: 0, resize: 0 } }}
+        style={{ pointerEvents: 'none', touchAction: 'none' }}
       >
         <GradientScene />
       </Canvas>
