@@ -65,7 +65,7 @@ export function Sidebar() {
     <>
       {/* Hamburger Button */}
       <button
-        className={`${styles.hamburger} ${isOpen ? styles.open : ""} ${isDark ? styles.light : ""}`}
+        className={`${styles.hamburger} ${isOpen ? styles.open : ""} ${isDark && !isOpen ? styles.light : ""}`}
         onClick={toggleSidebar}
         aria-label="Toggle menu"
       >
