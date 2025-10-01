@@ -20,7 +20,9 @@ export function SinglePreview({
   soundcloudUrl,
 }: SinglePreviewProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [transform, setTransform] = useState({ rotateX: 0, rotateY: 0 });
   const sectionRef = useRef<HTMLElement>(null);
+  const coverRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,6 +41,26 @@ export function SinglePreview({
     return () => observer.disconnect();
   }, []);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!coverRef.current) return;
+
+    const rect = coverRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateY = ((x - centerX) / centerX) * 5;
+    const rotateX = ((centerY - y) / centerY) * 5;
+
+    setTransform({ rotateX, rotateY });
+  };
+
+  const handleMouseLeave = () => {
+    setTransform({ rotateX: 0, rotateY: 0 });
+  };
+
   return (
     <section ref={sectionRef} className={styles.section}>
       <div className={styles.container}>
@@ -48,7 +70,16 @@ export function SinglePreview({
           </div>
 
           <div className={styles.coverArea}>
-            <div className={styles.coverWrapper}>
+            <div
+              ref={coverRef}
+              className={styles.coverWrapper}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                transform: `perspective(1000px) rotateX(${transform.rotateX}deg) rotateY(${transform.rotateY}deg)`,
+                transition: 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+              }}
+            >
               <div className={styles.coverGlow} />
               <Image
                 src={coverImage}
