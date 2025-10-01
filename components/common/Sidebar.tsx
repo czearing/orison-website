@@ -10,6 +10,7 @@ export function Sidebar() {
 
   useEffect(() => {
     let rafId: number;
+    let isScrolling = false;
 
     const checkBackground = () => {
       const hamburger = document.querySelector(`.${styles.hamburger}`) as HTMLElement;
@@ -66,11 +67,22 @@ export function Sidebar() {
         // If brightness is low, use white color
         setIsDark(brightness < 128);
       }
+
+      // Keep checking during scroll
+      if (isScrolling) {
+        rafId = requestAnimationFrame(checkBackground);
+      }
     };
 
     const handleScroll = () => {
+      isScrolling = true;
       if (rafId) cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(checkBackground);
+    };
+
+    const handleScrollEnd = () => {
+      isScrolling = false;
+      checkBackground();
     };
 
     // Check immediately and after DOM loads
@@ -79,14 +91,15 @@ export function Sidebar() {
 
     // Use both scroll and scrollend for better responsiveness
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("scrollend", checkBackground, { passive: true } as any);
+    window.addEventListener("scrollend", handleScrollEnd, { passive: true } as any);
     window.addEventListener("resize", checkBackground);
 
     return () => {
       clearTimeout(timer);
+      isScrolling = false;
       if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("scrollend", checkBackground);
+      window.removeEventListener("scrollend", handleScrollEnd);
       window.removeEventListener("resize", checkBackground);
     };
   }, []);
