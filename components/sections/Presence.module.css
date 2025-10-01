@@ -15,6 +15,14 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.container.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .platforms {
@@ -44,12 +52,12 @@
 }
 
 .contact {
-  color: #8a9ba8;
-  opacity: 0.6;
+  color: #c0d0e0;
+  opacity: 0.8;
 }
 
 .email {
-  color: #8a9ba8;
+  color: #c0d0e0;
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   border-bottom: 1px solid transparent;
@@ -57,7 +65,7 @@
 
 .email:hover {
   opacity: 1;
-  border-bottom-color: #8a9ba8;
+  border-bottom-color: #c0d0e0;
 }
 
 /* Tablet */

@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Caption } from "@/components/common/Typography";
 import styles from "./Presence.module.css";
@@ -16,9 +19,29 @@ const platforms: PlatformLink[] = [
 ];
 
 export function Presence() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className={styles.section}>
-      <div className={styles.container}>
+    <section ref={sectionRef} className={styles.section}>
+      <div className={`${styles.container} ${isVisible ? styles.visible : ""}`}>
         <div className={styles.platforms}>
           {platforms.map((platform) => (
             <a

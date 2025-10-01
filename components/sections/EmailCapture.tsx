@@ -1,13 +1,32 @@
 "use client";
 
-import { useState, FormEvent, useEffect } from "react";
+import { useState, FormEvent, useEffect, useRef } from "react";
 import { Label, Caption, Body } from "@/components/common/Typography";
 import { useSubscribe } from "@/utils/useSubscribe";
 import styles from "./EmailCapture.module.css";
 
 export function EmailCapture() {
   const [email, setEmail] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
   const { mutate, isPending, isSuccess, isError, reset } = useSubscribe();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (isSuccess) {
@@ -30,8 +49,8 @@ export function EmailCapture() {
   };
 
   return (
-    <section className={styles.section}>
-      <div className={styles.container}>
+    <section ref={sectionRef} className={styles.section}>
+      <div className={`${styles.container} ${isVisible ? styles.visible : ""}`}>
         <Label className={styles.heading}>Join the Procession</Label>
         <Body size="sm" className={styles.subheading}>
           New releases, exclusive content, and early access to what&apos;s next
