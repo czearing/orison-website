@@ -24,8 +24,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ORISON | Neo-Classical Progressive House",
-  description: "Official website of ORISON - Neo-Classical Progressive House artist",
+  title: "ORISON",
+  description: "Official website of ORISON",
   icons: {
     icon: "/icons/favicon.svg",
   },
