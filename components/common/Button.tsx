@@ -1,14 +1,9 @@
-import { ReactNode } from "react";
 import styles from "./Button.module.css";
+import { ButtonProps } from "./Button.types";
 
-interface ButtonProps {
-  children: ReactNode;
-  href?: string;
-  onClick?: () => void;
-  variant?: "primary" | "secondary";
-  className?: string;
-}
-
+/**
+ * A flexible button component that can render as either a button or an anchor tag
+ */
 export function Button({
   children,
   href,

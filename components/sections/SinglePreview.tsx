@@ -5,16 +5,12 @@ import { useEffect, useRef, useState } from "react";
 import { Heading, Label, Body, Caption } from "@/components/common/Typography";
 import { Button } from "@/components/common/Button";
 import styles from "./SinglePreview.module.css";
+import { SinglePreviewProps } from "./SinglePreview.types";
 
-interface SinglePreviewProps {
-  title: string;
-  releaseDate: string;
-  description: string;
-  coverImage: string;
-  spotifyUrl?: string;
-  soundcloudUrl?: string;
-}
-
+/**
+ * Component to preview an upcoming or recently released single.
+ * Displays cover art, release information, and streaming links.
+ */
 export function SinglePreview({
   title,
   releaseDate,
