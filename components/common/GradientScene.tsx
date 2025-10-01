@@ -27,12 +27,6 @@ export function GradientScene() {
 
   return (
     <>
-      {/* Cream background */}
-      <mesh position={[0, 0, -1]}>
-        <planeGeometry args={[20, 20]} />
-        <meshBasicMaterial color="#FFFEF8" />
-      </mesh>
-
       <group ref={groupRef} scale={[scale, scale, 1]}>
         {/* Main circle - thin black stroke */}
         <mesh>
