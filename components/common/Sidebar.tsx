@@ -57,6 +57,32 @@ export function Sidebar() {
     };
   }, []);
 
+  // Handle escape key to close sidebar
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isOpen]);
+
+  // Prevent body scroll when sidebar is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -76,11 +102,19 @@ export function Sidebar() {
 
       {/* Overlay */}
       {isOpen && (
-        <div className={styles.overlay} onClick={toggleSidebar} />
+        <div
+          className={styles.overlay}
+          onClick={toggleSidebar}
+          aria-hidden="true"
+        />
       )}
 
       {/* Sidebar */}
-      <nav className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
+      <nav
+        className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}
+        aria-label="Main navigation"
+        role="navigation"
+      >
         <div className={styles.sidebarContent}>
           <Link href="/" className={styles.link} onClick={toggleSidebar}>
             Home
