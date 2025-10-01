@@ -11,7 +11,7 @@ export function GradientScene() {
   useFrame((state) => {
     if (groupRef.current) {
       // Rotate the entire group (circle with node) for orbit animation
-      groupRef.current.rotation.z = state.clock.elapsedTime * 0.5;
+      groupRef.current.rotation.z = state.clock.elapsedTime * 0.2;
     }
   });
 
