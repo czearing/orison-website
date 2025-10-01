@@ -27,6 +27,8 @@ export function Presence() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          // Disconnect after first intersection for performance
+          observer.disconnect();
         }
       },
       { threshold: 0.2 }
@@ -58,6 +60,7 @@ export function Presence() {
                 width={24}
                 height={24}
                 className={styles.icon}
+                loading="lazy"
               />
             </a>
           ))}

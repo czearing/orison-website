@@ -16,6 +16,8 @@ export function EmailCapture() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          // Disconnect after first intersection for performance
+          observer.disconnect();
         }
       },
       { threshold: 0.2 }
@@ -49,7 +51,7 @@ export function EmailCapture() {
   };
 
   return (
-    <section ref={sectionRef} className={styles.section}>
+    <section ref={sectionRef} className={styles.section} data-dark-section>
       <div className={`${styles.container} ${isVisible ? styles.visible : ""}`}>
         <Label className={styles.heading}>Join the Procession</Label>
         <Body size="sm" className={styles.subheading}>

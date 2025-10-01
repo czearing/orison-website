@@ -9,98 +9,51 @@ export function Sidebar() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    let rafId: number;
-    let isScrolling = false;
+    const checkHamburgerBackground = () => {
+      const darkSections = document.querySelectorAll('[data-dark-section]');
 
-    const checkBackground = () => {
-      const hamburger = document.querySelector(`.${styles.hamburger}`) as HTMLElement;
-      if (!hamburger) return;
+      if (darkSections.length === 0) {
+        setIsDark(false);
+        return;
+      }
 
-      const rect = hamburger.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
+      // Check if any dark section is covering the hamburger area (top 40px where hamburger is)
+      const hamburgerTop = 0;
+      const hamburgerBottom = 40;
 
-      // Temporarily hide the hamburger to detect what's behind it
-      hamburger.style.pointerEvents = 'none';
-      const element = document.elementFromPoint(centerX, centerY);
-      hamburger.style.pointerEvents = 'auto';
-
-      if (!element) return;
-
-      // Walk up the DOM tree to find an element with a background color
-      let currentElement: HTMLElement | null = element as HTMLElement;
-      let bgColor = '';
-
-      while (currentElement && currentElement !== document.body) {
-        const computedStyle = window.getComputedStyle(currentElement);
-        const bg = computedStyle.backgroundColor;
-
-        // Check if background is not transparent
-        if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') {
-          bgColor = bg;
-          break;
+      let isDarkBehind = false;
+      darkSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        // Check if dark section overlaps with hamburger vertical position
+        if (rect.top <= hamburgerBottom && rect.bottom >= hamburgerTop) {
+          isDarkBehind = true;
         }
-        currentElement = currentElement.parentElement;
-      }
+      });
 
-      // If no background found, check body and html
-      if (!bgColor) {
-        const bodyStyle = window.getComputedStyle(document.body);
-        bgColor = bodyStyle.backgroundColor;
-
-        if (!bgColor || bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
-          const htmlStyle = window.getComputedStyle(document.documentElement);
-          bgColor = htmlStyle.backgroundColor;
-        }
-      }
-
-      // Parse rgba/rgb values
-      const match = bgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*[\d.]+)?\)/);
-      if (match) {
-        const r = parseInt(match[1]);
-        const g = parseInt(match[2]);
-        const b = parseInt(match[3]);
-
-        // Calculate brightness (perceived luminance)
-        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-
-        // If brightness is low, use white color
-        setIsDark(brightness < 128);
-      }
-
-      // Keep checking during scroll
-      if (isScrolling) {
-        rafId = requestAnimationFrame(checkBackground);
-      }
+      setIsDark(isDarkBehind);
     };
 
+    // Check on mount
+    checkHamburgerBackground();
+
+    // Throttle scroll events with RAF
+    let rafId: number | null = null;
     const handleScroll = () => {
-      isScrolling = true;
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(checkBackground);
+      if (rafId !== null) return;
+
+      rafId = requestAnimationFrame(() => {
+        checkHamburgerBackground();
+        rafId = null;
+      });
     };
 
-    const handleScrollEnd = () => {
-      isScrolling = false;
-      checkBackground();
-    };
-
-    // Check immediately and after DOM loads
-    checkBackground();
-    const timer = setTimeout(checkBackground, 100);
-
-    // Use both scroll and scrollend for better responsiveness
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("scrollend", handleScrollEnd, { passive: true } as any);
-    window.addEventListener("resize", checkBackground);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
-      clearTimeout(timer);
-      isScrolling = false;
-      if (rafId) cancelAnimationFrame(rafId);
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("scrollend", handleScrollEnd);
-      window.removeEventListener("resize", checkBackground);
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
     };
   }, []);
 

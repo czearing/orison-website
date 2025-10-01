@@ -23,12 +23,15 @@ export function SinglePreview({
   const [transform, setTransform] = useState({ rotateX: 0, rotateY: 0 });
   const sectionRef = useRef<HTMLElement>(null);
   const coverRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          // Disconnect after first intersection for performance
+          observer.disconnect();
         }
       },
       { threshold: 0.2 }
@@ -38,31 +41,47 @@ export function SinglePreview({
       observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!coverRef.current) return;
 
-    const rect = coverRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    // Throttle using requestAnimationFrame for smooth 60fps updates
+    if (rafRef.current) return;
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = undefined;
 
-    const rotateY = ((x - centerX) / centerX) * 5;
-    const rotateX = ((centerY - y) / centerY) * 5;
+      if (!coverRef.current) return;
 
-    setTransform({ rotateX, rotateY });
+      const rect = coverRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateY = ((x - centerX) / centerX) * 5;
+      const rotateX = ((centerY - y) / centerY) * 5;
+
+      setTransform({ rotateX, rotateY });
+    });
   };
 
   const handleMouseLeave = () => {
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = undefined;
+    }
     setTransform({ rotateX: 0, rotateY: 0 });
   };
 
   return (
-    <section ref={sectionRef} className={styles.section}>
+    <section ref={sectionRef} className={styles.section} data-dark-section>
       <div className={styles.container}>
         <div className={`${styles.grid} ${isVisible ? styles.visible : ""}`}>
           <div className={styles.header}>
