@@ -1,0 +1,47 @@
+.main {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background-color: #FFFEF8;
+}
+
+.container {
+  max-width: 800px;
+  width: 100%;
+}
+
+.heading {
+  color: #000;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.text {
+  color: #000;
+  opacity: 0.8;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 3rem 1.5rem;
+  }
+
+  .heading {
+    margin-bottom: 2rem;
+  }
+
+  .content {
+    gap: 1.5rem;
+  }
+}

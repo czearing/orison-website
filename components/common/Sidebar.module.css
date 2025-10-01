@@ -1,0 +1,143 @@
+.hamburger {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1001;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  transition: transform 0.3s ease;
+}
+
+.hamburger:hover {
+  transform: scale(1.1);
+}
+
+.line {
+  width: 24px;
+  height: 2px;
+  background: #000;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.2s ease;
+  border-radius: 2px;
+}
+
+.hamburger.light .line {
+  background: #fff;
+}
+
+.hamburger.open .line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.open .line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open .line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 320px;
+  height: 100vh;
+  background: #FFFEF8;
+  z-index: 1000;
+  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.sidebarContent {
+  padding: 6rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.link {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #000;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}
+
+.link:hover {
+  opacity: 1;
+  transform: translateX(-4px);
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .sidebar {
+    width: 280px;
+    right: -280px;
+  }
+
+  .sidebarContent {
+    padding: 5rem 1.5rem 1.5rem;
+  }
+
+  .link {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hamburger {
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    right: -100%;
+  }
+
+  .link {
+    font-size: 1.5rem;
+  }
+}
