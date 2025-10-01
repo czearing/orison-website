@@ -36,7 +36,7 @@
 
 .letter {
   display: inline-block;
-  color: #fff;
+  color: #000;
   opacity: 0;
   transform: translateY(40px) rotateX(90deg);
   animation: letterReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -60,7 +60,7 @@
   display: block;
   margin: 0;
   opacity: 0;
-  color: #8a9ba8;
+  color: #000;
   animation: fadeInUp 1.5s ease-out 1.2s forwards;
 }
 

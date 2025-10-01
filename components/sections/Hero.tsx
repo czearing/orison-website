@@ -29,11 +29,6 @@ export function Hero() {
           <div className={styles.titleGlow} />
         </div>
         <Label className={styles.subtitle}>Neo-Classical Progressive House</Label>
-        <div className={styles.ornament}>
-          <div className={styles.ornamentLine} />
-          <div className={styles.ornamentDot} />
-          <div className={styles.ornamentLine} />
-        </div>
       </div>
       <div className={styles.scrollIndicator}>
         <div className={styles.scrollLine} />
