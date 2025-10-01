@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Display, Label } from "@/components/common/Typography";
+import { Display } from "@/components/common/Typography";
 import styles from "./Hero.module.css";
 
 export function Hero() {
@@ -28,7 +28,6 @@ export function Hero() {
           </Display>
           <div className={styles.titleGlow} />
         </div>
-        <Label className={styles.subtitle}>Neo-Classical Progressive House</Label>
       </div>
       <div className={styles.scrollIndicator}>
         <div className={styles.scrollLine} />
