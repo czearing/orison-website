@@ -14,10 +14,17 @@
   width: 100%;
 }
 
-.heading {
-  color: #000;
+.imageContainer {
+  display: flex;
+  justify-content: center;
   margin-bottom: 3rem;
-  text-align: center;
+}
+
+.bioPic {
+  border-radius: 4px;
+  width: 100%;
+  height: auto;
+  max-width: 400px;
 }
 
 .content {
@@ -30,6 +37,19 @@
   color: #000;
   opacity: 0.8;
   line-height: 1.8;
+  text-align: left;
+}
+
+.pullQuote {
+  font-family: var(--font-dm-serif);
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #000;
+  opacity: 0.9;
+  padding: 2rem 3rem;
+  margin: 1rem 0;
+  text-align: center;
+  line-height: 1.6;
 }
 
 @media (max-width: 768px) {
@@ -43,5 +63,10 @@
 
   .content {
     gap: 1.5rem;
+  }
+
+  .pullQuote {
+    font-size: 1.25rem;
+    padding: 1.5rem 1rem;
   }
 }

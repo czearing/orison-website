@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans, DM_Serif_Display, JetBrains_Mono } from "next/font/google";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import { Sidebar } from "@/components/common/Sidebar";
+import { Presence } from "@/components/sections/Presence";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 
@@ -48,6 +49,7 @@ export default function RootLayout({
       <body className={`${dmSans.variable} ${dmSerif.variable} ${jetbrainsMono.variable}`}>
         <Sidebar />
         <QueryProvider>{children}</QueryProvider>
+        <Presence />
         <Analytics />
       </body>
     </html>
