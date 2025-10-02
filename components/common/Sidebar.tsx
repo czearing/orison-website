@@ -122,6 +122,9 @@ export function Sidebar() {
           <Link href="/about" className={styles.link} onClick={toggleSidebar}>
             About
           </Link>
+          <Link href="/music" className={styles.link} onClick={toggleSidebar}>
+            Music
+          </Link>
           <Link href="/shop" className={styles.link} onClick={toggleSidebar}>
             Shop
           </Link>

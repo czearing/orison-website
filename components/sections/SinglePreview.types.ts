@@ -14,4 +14,10 @@ export interface SinglePreviewProps {
   spotifyUrl?: string;
   /** Optional SoundCloud URL for listening */
   soundcloudUrl?: string;
+  /** Optional Spotify embed URL for player (e.g., https://open.spotify.com/embed/track/...) */
+  spotifyEmbedUrl?: string;
+  /** Optional SoundCloud embed URL for player */
+  soundcloudEmbedUrl?: string;
+  /** Optional direct audio file URL for custom HTML5 player */
+  audioPreviewUrl?: string;
 }

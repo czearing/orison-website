@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Heading, Label, Body, Caption } from "@/components/common/Typography";
 import { Button } from "@/components/common/Button";
+import { MusicPlayer } from "@/components/common/MusicPlayer";
 import styles from "./SinglePreview.module.css";
 import { SinglePreviewProps } from "./SinglePreview.types";
 
@@ -18,6 +19,9 @@ export function SinglePreview({
   coverImage,
   spotifyUrl,
   soundcloudUrl,
+  spotifyEmbedUrl,
+  soundcloudEmbedUrl,
+  audioPreviewUrl,
 }: SinglePreviewProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [transform, setTransform] = useState({ rotateX: 0, rotateY: 0 });
@@ -117,6 +121,13 @@ export function SinglePreview({
             <Body size="lg" className={styles.description}>
               {description}
             </Body>
+
+            <MusicPlayer
+              spotifyEmbedUrl={spotifyEmbedUrl}
+              soundcloudEmbedUrl={soundcloudEmbedUrl}
+              audioPreviewUrl={audioPreviewUrl}
+              trackTitle={title}
+            />
 
             <div className={styles.ctaContainer}>
               <Button href={spotifyUrl || "#"} variant="primary">
