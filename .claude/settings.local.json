@@ -7,7 +7,8 @@
       "Bash(tree:*)",
       "Bash(yarn add:*)",
       "Bash(yarn build)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

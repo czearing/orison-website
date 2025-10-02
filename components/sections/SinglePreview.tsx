@@ -23,7 +23,7 @@ export function SinglePreview({
   const [transform, setTransform] = useState({ rotateX: 0, rotateY: 0 });
   const sectionRef = useRef<HTMLElement>(null);
   const coverRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
