@@ -6,15 +6,13 @@
   height: 100vh;
   z-index: 0;
   background: #FFFEF8;
-  pointer-events: none;
-  touch-action: none;
+  pointer-events: none !important;
   user-select: none;
   -webkit-user-select: none;
 }
 
 .container * {
   pointer-events: none !important;
-  touch-action: none !important;
 }
 
 @supports (-webkit-touch-callout: none) {
