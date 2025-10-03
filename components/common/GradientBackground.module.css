@@ -7,12 +7,20 @@
   z-index: 0;
   background: #FFFEF8;
   pointer-events: none !important;
+  touch-action: auto !important;
   user-select: none;
   -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .container * {
   pointer-events: none !important;
+  touch-action: auto !important;
+}
+
+.container canvas {
+  pointer-events: none !important;
+  touch-action: auto !important;
 }
 
 @supports (-webkit-touch-callout: none) {
